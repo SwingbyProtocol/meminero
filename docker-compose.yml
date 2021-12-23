@@ -47,10 +47,10 @@ services:
     image: swingbylabs/internal-api
     restart: always
     depends_on:
-      - redis
       - postgres
     ports:
       - 0.0.0.0:3001:3001
+      - 0.0.0.0:9910:9910
     volumes:
       - ${DIR}/internal-api:/config
     command:
