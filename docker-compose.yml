@@ -9,6 +9,10 @@ services:
       - 6379:6379
     volumes:
       - ${DIR}/redis:/data
+    networks:
+      infura:
+        ipv4_address: 10.2.0.101
+
   postgres:
     container_name: meminero-postgres
     image: postgres:13
@@ -21,6 +25,10 @@ services:
       - 5432:5432
     volumes:
       - ${DIR}/postgresql:/var/lib/postgresql/data
+    networks:
+      infura:
+        ipv4_address: 10.2.0.102
+
   meminero:
     container_name: meminero
     build: "./"
@@ -34,6 +42,9 @@ services:
       - PG_PASSWORD=password
     volumes:
       - ${DIR}/meminero:/config
+    networks:
+      infura:
+        ipv4_address: 10.2.0.103
     command:
       [
         "./meminero",
@@ -42,6 +53,8 @@ services:
         "--config",
         "/config/config.yml"
       ]
+
+
   internal-api:
     container_name: internal-api
     image: swingbylabs/internal-api
@@ -53,6 +66,9 @@ services:
       - 0.0.0.0:9910:9910
     volumes:
       - ${DIR}/internal-api:/config
+    networks:
+      infura:
+        ipv4_address: 10.2.0.104
     command:
       [
         "./internal-api",
@@ -60,3 +76,12 @@ services:
         "--config",
         "/config/config.yml"
       ]
+
+networks:
+  infura:
+    name: infura
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.2.0.0/24
