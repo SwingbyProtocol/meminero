@@ -29,8 +29,7 @@ services:
       - redis
       - postgres
     ports:
-      - 0.0.0.0:3001:3001
-      - 0.0.0.0:3000:3000
+      - 0.0.0.0:9909:9909
     environment:
       - PG_PASSWORD=password
     volumes:
