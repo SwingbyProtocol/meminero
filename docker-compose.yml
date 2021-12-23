@@ -6,7 +6,7 @@ services:
     restart: always
     command: ["redis-server", "--appendonly", "yes"]
     ports:
-      - 0.0.0.0:6379:6379
+      - 6379:6379
     volumes:
       - ${DIR}/redis:/data
   postgres:
@@ -18,7 +18,7 @@ services:
       - POSTGRES_DB=meminero
       - POSTGRES_PASSWORD=password
     ports:
-      - 0.0.0.0:5432:5432
+      - 5432:5432
     volumes:
       - ${DIR}/postgresql:/var/lib/postgresql/data
   meminero:
@@ -29,10 +29,10 @@ services:
       - redis
       - postgres
     ports:
-      - 127.0.0.1:3001:3001
-      - 127.0.0.1:3000:3000
+      - 0.0.0.0:3001:3001
+      - 0.0.0.0:3000:3000
     environment:
       - PG_PASSWORD=password
     volumes:
-      - ${DIR}}/meminero:/config
+      - ${DIR}/meminero:/config
     command: ["./meminero", "scrape", "queue", "--config", "/config/config.yml"]
