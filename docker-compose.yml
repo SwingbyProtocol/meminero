@@ -8,7 +8,7 @@ services:
     ports:
       - 0.0.0.0:6379:6379
     volumes:
-      - .volumes/redis:/data
+      - ${DIR}/redis:/data
   postgres:
     container_name: meminero-postgres
     image: postgres:13
@@ -20,10 +20,10 @@ services:
     ports:
       - 0.0.0.0:5432:5432
     volumes:
-      - .volumes/postgresql:/var/lib/postgresql/data
+      - ${DIR}/postgresql:/var/lib/postgresql/data
   meminero:
     container_name: meminero
-    image: barnbridge/meminero:latest
+    build: "./" 
     restart: always
     depends_on:
       - redis
@@ -34,4 +34,5 @@ services:
     environment:
       - PG_PASSWORD=password
     volumes:
-      - .volumes/meminero:/config
+      - ${DIR}}/meminero:/config
+    command: ["./meminero", "scrape", "queue", "--config", "/config/config.yml"]
