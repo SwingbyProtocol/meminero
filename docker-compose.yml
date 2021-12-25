@@ -51,7 +51,8 @@ services:
         "scrape",
         "queue",
         "--config",
-        "/config/config.yml"
+        "/config/config.yml",
+        "--vv"
       ]
 
 
