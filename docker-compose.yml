@@ -9,8 +9,8 @@ services:
         max-file: "5"
         max-size: "10m"
     command: [ "redis-server", "--appendonly", "yes" ]
-    ports:
-      - 6379:6379
+    #ports:
+    #  - 6379:6379
     volumes:
       - ${DIR}/redis:/data
     networks:
@@ -29,8 +29,8 @@ services:
       - POSTGRES_USER=meminero
       - POSTGRES_DB=meminero
       - POSTGRES_PASSWORD=password
-    ports:
-      - 5432:5432
+    #ports:
+    #  - 5432:5432
     volumes:
       - ${DIR}/postgresql:/var/lib/postgresql/data
     networks:
