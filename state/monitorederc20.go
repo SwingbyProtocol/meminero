@@ -2,6 +2,7 @@ package state
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/pkg/errors"
 
@@ -39,6 +40,7 @@ func (m *Manager) loadAllERC20(ctx context.Context) error {
 		a = utils.NormalizeAddress(a)
 		m.monitoredERC20[a] = true
 	}
+	fmt.Println(m.monitoredERC20)
 
 	return nil
 }

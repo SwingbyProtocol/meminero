@@ -2,6 +2,7 @@ package state
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/barnbridge/meminero/utils"
 	"github.com/pkg/errors"
@@ -23,6 +24,7 @@ func (m *Manager) loadAllAccounts(ctx context.Context) error {
 		a = utils.NormalizeAddress(a)
 		m.monitoredAccounts[a] = true
 	}
+	fmt.Println((m.monitoredAccounts))
 
 	return nil
 }
