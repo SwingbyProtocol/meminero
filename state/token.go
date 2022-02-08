@@ -2,6 +2,7 @@ package state
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/pkg/errors"
 
@@ -25,7 +26,7 @@ func (m *Manager) loadAllTokens(ctx context.Context) error {
 		t.Address = utils.NormalizeAddress(t.Address)
 		m.Tokens[t.Address] = t
 	}
-
+	fmt.Println(m.Tokens)
 	return nil
 }
 
